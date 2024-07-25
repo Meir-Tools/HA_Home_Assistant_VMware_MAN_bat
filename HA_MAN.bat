@@ -55,15 +55,13 @@ EXIT /B 0
 EXIT /B 0
 :OPT0 | 0 - Some other example how to use this menu tool 
 EXIT /B 0
-:OPTW | W - Write here something
-	echo test 123 123 123
+:OPTE | E - Edit
+	::set lpath=%0 ::in top
+	echo %lpath%
+	start "" "C:\Program Files\Notepad++\notepad++.exe" %lpath%
 	pause
 EXIT /B 0
-:OPTS | S - Write here something
-echo test 123 123 123
-pause
-EXIT /B 0
-:OPTE | E - Edit
+:OPTr | r - r Edit
 	::set lpath=%0 ::in top
 	echo %lpath%
 	start "" "C:\Program Files\Notepad++\notepad++.exe" %lpath%
@@ -71,9 +69,9 @@ EXIT /B 0
 EXIT /B 0
 :OPTI | I - Info
 	cls
-	echo info about this MAN menu
-	echo By Meir-Tools ^| https://github.com/Meir-Tools/MAN
-	echo Revision 0.9b
+	CALL %BATman% :Info_About
+	echo.
+	echo This is Home Assistant Menu 
 	pause 
 EXIT /B 0
 :OPTQ | Q - exit
