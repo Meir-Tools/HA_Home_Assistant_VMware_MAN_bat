@@ -18,15 +18,7 @@ set lpath=%0
 ::--------------------------------------------------
 :Main
 	CLS
-	echo ----------------------------------------------------------------------
-	echo "       @@@@        @@@.               #@*          @@@@@@@@@@@@     "        
-	echo "       @@*@(      @&#@.      @@@                   @@.        @@    "        
-	echo "       @@ (@.    @@ #@.   @@    .@@   #@*          @@.       @@/    "        
-	echo "       @@  @@   @@  #@.  @@@@@@@@@@@  #@*          @@@@@@@@@/       "        
-	echo "       @@   @@ (@   #@.  @@           #@*          @@.     *@@.     "        
-	echo "       @@    @@@,   #@.  .@@,   .@@*  #@*          @@.       &@@    "        
-	echo "                             /#(.                                   "
-	echo ----=Meir-Tools=-----------------------------------------------------------
+	CALL %BATman% :MAN_Print_Meir_tools_Logo_shrinked1 %0
 	ECHO MAN-MENU
 	echo ----------------------------------------------------------------------
 	::-------------------------------------------------------------------------------------------
@@ -62,15 +54,6 @@ EXIT /B 0
 	PAUSE
 EXIT /B 0
 :OPT0 | 0 - Some other example how to use this menu tool 
-EXIT /B 0
-:OPT7 | 7 - 20221226_BatteryDiagMenu
-	call "C:\Users\User\Desktop\20221216_batchfile\20221226_BatteryDiagMenu.bat"
-EXIT /B 0
-:OPT8 | 8 - 20221226_MenuV1_Sdarot
-	call "C:\Users\User\Desktop\20221216_batchfile\20221226_MenuV1_Sdarot.bat"
-EXIT /B 0
-:OPT9 | 9 - Check_installed_v0.2
-	call "C:\Users\User\Documents\GitHub\Check_Installed\check_installed_v0.2.bat"
 EXIT /B 0
 :OPTW | W - Write here something
 	echo test 123 123 123
