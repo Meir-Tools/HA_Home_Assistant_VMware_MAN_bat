@@ -58,6 +58,9 @@ EXIT /B 0
 :OPT5 | 5 - Open HA Gui
 	start "" "http://homeassistant.local:8123/" & timeout /t 3
 EXIT /B 0
+:OPT- | - - - - - - some beta and testing here - - - - - - - -  
+	PAUSE
+EXIT /B 0
 :OPT0 | 0 - Some other example how to use this menu tool 
 EXIT /B 0
 :OPT7 | 7 - 20221226_BatteryDiagMenu
@@ -68,9 +71,6 @@ EXIT /B 0
 EXIT /B 0
 :OPT9 | 9 - Check_installed_v0.2
 	call "C:\Users\User\Documents\GitHub\Check_Installed\check_installed_v0.2.bat"
-EXIT /B 0
-:OPTN | N - Take Notes
-	call "C:\Users\User\Desktop\20221216_batchfile\00xx_Notes.bat"
 EXIT /B 0
 :OPTW | W - Write here something
 	echo test 123 123 123
