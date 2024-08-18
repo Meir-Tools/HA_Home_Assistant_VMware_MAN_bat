@@ -13,6 +13,8 @@ set my_ip=10.0.0.0
 set my_user=admin
 set my_pass=pass
 set lpath=%0
+:: set Meir-Tools | VMware assist Global variables
+set VMX_File="C:\Home Assistant\ha\ha.vmx" &REM Use the 'D' Option here to find the vmx file or run 'dir /S "C:\Users\MSI\Documents\Virtual Machines\*.vmx"'
 ::--------------------------------------------------
 :: Run once , can run inly in batch file , Global
 ::--------------------------------------------------
@@ -49,6 +51,11 @@ EXIT /B 0
 EXIT /B 0
 :OPT5 | 5 - Open HA Gui
 	start "" "http://homeassistant.local:8123/" & timeout /t 3
+EXIT /B 0
+:OPT6 | 6 - Get ip
+	set VMX_File="C:\Home Assistant\ha\ha.vmx"
+	cd "C:\Program Files (x86)\VMware\VMware Player" & vmrun getGuestIPAddress %VMX_File%
+	pause
 EXIT /B 0
 :OPT- | - - - - - - some beta and testing here - - - - - - - -  
 	PAUSE
