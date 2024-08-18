@@ -14,8 +14,13 @@ set my_ip=10.0.0.0
 set my_user=admin
 set my_pass=pass
 set lpath=%0
-:: set Meir-Tools | VMware assist Global variables
-set VMX_File="C:\Home Assistant\ha\ha.vmx" &REM Use the 'D' Option here to find the vmx file or run 'dir /S "C:\Users\MSI\Documents\Virtual Machines\*.vmx"'
+::--------------------------------------------------
+:: Meir-Tools | VMware assist | set Global variables
+::--------------------------------------------------
+set VMware_default_machines_path=%USERPROFILE%\Documents\Virtual Machines\
+set VMX_File=C:\Home Assistant\ha\ha.vmx &REM Use the 'D' Option here to find the vmx file or run 'dir /S "%USERPROFILE%\Documents\Virtual Machines\*.vmx"'
+set VMware_Player=C:\Program Files (x86)\VMware\VMware Player
+set vmrun=%VMware_Player%\vmrun
 ::--------------------------------------------------
 :: Run once , can run inly in batch file , Global
 ::--------------------------------------------------
@@ -36,26 +41,27 @@ GOTO :Main
 	set vlc="C:\Program Files\VideoLAN\VLC\vlc.exe"
 	set putty="C:\Program Files\PuTTY\putty.exe"
 	set WinSCP="C:\Users\User\AppData\Local\Programs\WinSCP\WinSCP.exe"
-	::cd "C:\Program Files (x86)\VMware\VMware Player" & vmrun start %VMX_File% nogui &REM gui
-	cd "C:\Program Files (x86)\VMware\VMware Player" & vmrun start %VMX_File% gui &REM gui
+	::"%vmrun%" start "%VMX_File%" nogui &REM gui
+	"%vmrun%" start "%VMX_File%" gui &REM gui
 	
 	::start "" %WinSCP% sftp://%my_user%:%my_pass%@%my_ip%
 EXIT /B 0
 :OPT2 | 2 - List VM
-	cd "C:\Program Files (x86)\VMware\VMware Player" & vmrun list
+	::cd "%VMware_Player%" & vmrun list &REM Old version
+	"%vmrun%" list
 	pause
 EXIT /B 0
 :OPT3 | 3 - Stop HA (soft)
-	cd "C:\Program Files (x86)\VMware\VMware Player" & vmrun stop %VMX_File% soft
+	"%vmrun%" stop "%VMX_File%" soft
 EXIT /B 0
 :OPT4 | 4 - Stop HA (hard)
-	cd "C:\Program Files (x86)\VMware\VMware Player" & vmrun stop %VMX_File% hard
+	"%vmrun%" stop "%VMX_File%" hard
 EXIT /B 0
 :OPT5 | 5 - Open HA Gui
 	start "" "http://homeassistant.local:8123/" & timeout /t 3
 EXIT /B 0
 :OPT6 | 6 - Get ip
-	cd "C:\Program Files (x86)\VMware\VMware Player" & vmrun getGuestIPAddress %VMX_File%
+	"%vmrun%" getGuestIPAddress "%VMX_File%"
 	pause
 EXIT /B 0
 :OPT- | - - - - - - some beta and testing here - - - - - - - -  
@@ -64,10 +70,10 @@ EXIT /B 0
 :OPT0 | 0 - Some other example how to use this menu tool 
 EXIT /B 0
 :OPTD | D - dir *.vmx files
-	:: C:\Users\MSI\Documents\Virtual Machines
-	:: dir "C:\Users\MSI\Documents\Virtual Machines"  *.vmx
-	:: dir /S "C:\Users\MSI\Documents\Virtual Machines\*.vmx"
-	dir /S "C:\Users\MSI\Documents\Virtual Machines\*.vmx"
+	:: %USERPROFILE%\Documents\Virtual Machines
+	:: dir "%USERPROFILE%\Documents\Virtual Machines"  *.vmx
+	:: dir /S "%USERPROFILE%\Documents\Virtual Machines\*.vmx"
+	dir /S "%USERPROFILE%\Documents\Virtual Machines\*.vmx"
 	pause
 EXIT /B 0
 :OPTE | E - Edit
