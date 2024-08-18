@@ -32,11 +32,12 @@ set VMX_File="C:\Home Assistant\ha\ha.vmx" &REM Use the 'D' Option here to find 
 	CALL :OPT%M% &REM replace here the IF %M%==1 GOTO OPT1 ...statements....
 GOTO :Main
 ::--------------------------MAN Functions------------------------------------------------
-:OPT1 | 1 - Run HA VM (nogui)
+:OPT1 | 1 - Run HA VM (gui)
 	set vlc="C:\Program Files\VideoLAN\VLC\vlc.exe"
 	set putty="C:\Program Files\PuTTY\putty.exe"
 	set WinSCP="C:\Users\User\AppData\Local\Programs\WinSCP\WinSCP.exe"
-	cd "C:\Program Files (x86)\VMware\VMware Player" & vmrun start "C:\Home Assistant\ha\ha.vmx" nogui &REM gui
+	::cd "C:\Program Files (x86)\VMware\VMware Player" & vmrun start %VMX_File% nogui &REM gui
+	cd "C:\Program Files (x86)\VMware\VMware Player" & vmrun start %VMX_File% gui &REM gui
 	
 	::start "" %WinSCP% sftp://%my_user%:%my_pass%@%my_ip%
 EXIT /B 0
@@ -45,16 +46,15 @@ EXIT /B 0
 	pause
 EXIT /B 0
 :OPT3 | 3 - Stop HA (soft)
-	cd "C:\Program Files (x86)\VMware\VMware Player" & vmrun stop "C:\Home Assistant\ha\ha.vmx" soft
+	cd "C:\Program Files (x86)\VMware\VMware Player" & vmrun stop %VMX_File% soft
 EXIT /B 0
 :OPT4 | 4 - Stop HA (hard)
-	cd "C:\Program Files (x86)\VMware\VMware Player" & vmrun stop "C:\Home Assistant\ha\ha.vmx" hard
+	cd "C:\Program Files (x86)\VMware\VMware Player" & vmrun stop %VMX_File% hard
 EXIT /B 0
 :OPT5 | 5 - Open HA Gui
 	start "" "http://homeassistant.local:8123/" & timeout /t 3
 EXIT /B 0
 :OPT6 | 6 - Get ip
-	set VMX_File="C:\Home Assistant\ha\ha.vmx"
 	cd "C:\Program Files (x86)\VMware\VMware Player" & vmrun getGuestIPAddress %VMX_File%
 	pause
 EXIT /B 0
