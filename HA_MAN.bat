@@ -55,6 +55,13 @@ EXIT /B 0
 EXIT /B 0
 :OPT0 | 0 - Some other example how to use this menu tool 
 EXIT /B 0
+:OPTD | D - dir *.vmx files
+	:: C:\Users\MSI\Documents\Virtual Machines
+	:: dir "C:\Users\MSI\Documents\Virtual Machines"  *.vmx
+	:: dir /S "C:\Users\MSI\Documents\Virtual Machines\*.vmx"
+	dir /S "C:\Users\MSI\Documents\Virtual Machines\*.vmx"
+	pause
+EXIT /B 0
 :OPTE | E - Edit
 	::set lpath=%0 ::in top
 	echo %lpath%
