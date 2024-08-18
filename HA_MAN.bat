@@ -3,6 +3,7 @@
 :: By Meir.e
 :: Menu in batch.
 :: https://github.com/Meir-Tools
+:: Meir-Tools | VMware assist tools
 ::--------------------------------------------------
 :: Run once , can run inly in batch file , Global
 ::--------------------------------------------------
