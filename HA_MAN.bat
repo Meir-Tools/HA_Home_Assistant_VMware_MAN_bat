@@ -2,7 +2,8 @@
 :: Modifies on : 20240818
 :: By Meir.e
 :: Menu in batch.
-:: https://github.com/Meir-Tools
+:: https://github.com/Meir-Tools | 
+:: Meir-Tools | Functions | BATman.bat | https://github.com/Meir-Tools/Functions/blob/main/BATman.bat | 
 :: Meir-Tools | VMware assist tools
 ::--------------------------------------------------
 :: Run once , can run inly in batch file , Global
