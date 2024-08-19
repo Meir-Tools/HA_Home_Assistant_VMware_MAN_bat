@@ -7,7 +7,7 @@
 ::--------------------------------------------------
 :: Run once , can run inly in batch file , Global
 ::--------------------------------------------------
-@ECHO OFF & TITLE Mei-R & SET BATman=%USERPROFILE%\Documents\GitHub\Functions\BATman
+@ECHO OFF & TITLE Meir-Tools & SET BATman=%USERPROFILE%\Documents\GitHub\Functions\BATman
 if exist %BATman%.* ( echo %BATman% -^> Installed ) else ( echo %BATman% -^> Not Installed & PAUSE)
 :: confs
 set my_ip=10.0.0.0
@@ -15,35 +15,52 @@ set my_user=admin
 set my_pass=pass
 set lpath=%0
 ::--------------------------------------------------
+:: Meir-Tools | set Global variables
+::--------------------------------------------------
+set vlc="C:\Program Files\VideoLAN\VLC\vlc.exe"
+set putty="C:\Program Files\PuTTY\putty.exe"
+set WinSCP="C:\Users\User\AppData\Local\Programs\WinSCP\WinSCP.exe"
+set npp="C:\Program Files\Notepad++\notepad++.exe"
+::--------------------------------------------------
 :: Meir-Tools | VMware assist | set Global variables
 ::--------------------------------------------------
-set VMware_default_machines_path=%USERPROFILE%\Documents\Virtual Machines\
-set VMX_File=C:\Home Assistant\ha\ha.vmx &REM Use the 'D' Option here to find the vmx file or run 'dir /S "%USERPROFILE%\Documents\Virtual Machines\*.vmx"'
 set VMware_Player=C:\Program Files (x86)\VMware\VMware Player
+set VMware_default_machines_path=%USERPROFILE%\Documents\Virtual Machines\
 set vmrun=%VMware_Player%\vmrun
+::--------------------------------------------------
+:: Meir-Tools | VMware assist | set the custom image to work on
+::--------------------------------------------------
+set VMX_File=C:\Home Assistant\ha\ha.vmx &REM Use the 'D' Option here to find the vmx file or run 'dir /S "%USERPROFILE%\Documents\Virtual Machines\*.vmx"'
 ::--------------------------------------------------
 :: Run once , can run inly in batch file , Global
 ::--------------------------------------------------
 :Main
+	::--------------------------------------------------
+	:: Print Header | 
+	::--------------------------------------------------
 	CLS
 	CALL %BATman% :MAN_Print_Meir_tools_Logo_shrinked1 %0
 	ECHO MAN-MENU
 	echo ----------------------------------------------------------------------
-	::-------------------------------------------------------------------------------------------
-	:: Notes
-	echo correnlty set ip %my_ip%
+	::--------------------------------------------------
+	::--------------------------------------------------
+	:: Notes | 
+	::--------------------------------------------------
+	setlocal enabledelayedexpansion &REM Note , may find a way or a need to exit it by 'endlocal' somwhere in the code.
+	FOR /F "tokens=1" %%F IN ('" "!vmrun!" getGuestIPAddress "!VMX_File!" "') DO set Result=%%F
+	echo correnlty set ip: %my_ip% ^| %Result%
+	echo correnlty used vmx file: %VMX_File%
+	::--------------------------------------------------
 	:: Print Menu here
+	::--------------------------------------------------
 	CALL %BATman% :MAN_ShowMenu %0
 	CALL :OPT%M% &REM replace here the IF %M%==1 GOTO OPT1 ...statements....
+	::--------------------------------------------------
 GOTO :Main
 ::--------------------------MAN Functions------------------------------------------------
-:OPT1 | 1 - Run HA VM (gui)
-	set vlc="C:\Program Files\VideoLAN\VLC\vlc.exe"
-	set putty="C:\Program Files\PuTTY\putty.exe"
-	set WinSCP="C:\Users\User\AppData\Local\Programs\WinSCP\WinSCP.exe"
+:OPT1 | 1 - Run VM (gui)
 	::"%vmrun%" start "%VMX_File%" nogui &REM gui
 	"%vmrun%" start "%VMX_File%" gui &REM gui
-	
 	::start "" %WinSCP% sftp://%my_user%:%my_pass%@%my_ip%
 EXIT /B 0
 :OPT2 | 2 - List VM
@@ -51,18 +68,21 @@ EXIT /B 0
 	"%vmrun%" list
 	pause
 EXIT /B 0
-:OPT3 | 3 - Stop HA (soft)
+:OPT3 | 3 - Stop VM (soft)
 	"%vmrun%" stop "%VMX_File%" soft
 EXIT /B 0
-:OPT4 | 4 - Stop HA (hard)
+:OPT4 | 4 - Stop VM (hard)
 	"%vmrun%" stop "%VMX_File%" hard
 EXIT /B 0
-:OPT5 | 5 - Open HA Gui
-	start "" "http://homeassistant.local:8123/" & timeout /t 3
-EXIT /B 0
-:OPT6 | 6 - Get ip
+:OPT5 | 5 - Get IP
 	"%vmrun%" getGuestIPAddress "%VMX_File%"
 	pause
+EXIT /B 0
+:OPT- | - - - - - - costum functions here - - - - - - - - - -  
+	PAUSE
+EXIT /B 0
+:OPT7 | 7 - Open HA Gui
+	start "" "http://homeassistant.local:8123/" & timeout /t 3
 EXIT /B 0
 :OPT- | - - - - - - some beta and testing here - - - - - - - -  
 	PAUSE
@@ -77,14 +97,7 @@ EXIT /B 0
 	pause
 EXIT /B 0
 :OPTE | E - Edit
-	::set lpath=%0 ::in top
-	echo %lpath%
-	start "" "C:\Program Files\Notepad++\notepad++.exe" %lpath%
-	pause
-EXIT /B 0
-:OPTr | r - r Edit
-	::set lpath=%0 ::in top
-	echo %lpath%
+	echo %lpath% &REM set lpath=%0 ::in top
 	start "" "C:\Program Files\Notepad++\notepad++.exe" %lpath%
 	pause
 EXIT /B 0
