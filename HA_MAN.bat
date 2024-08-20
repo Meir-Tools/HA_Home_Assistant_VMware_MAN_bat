@@ -23,6 +23,12 @@ set putty="C:\Program Files\PuTTY\putty.exe"
 set WinSCP="C:\Users\User\AppData\Local\Programs\WinSCP\WinSCP.exe"
 set npp="C:\Program Files\Notepad++\notepad++.exe"
 ::--------------------------------------------------
+:: Meir-Tools | VMware assist | set Global PATH variable
+::--------------------------------------------------
+:: C:\Program Files (x86)\VMware\VMware Player
+:: SET PATH=%PATH%;c:\whatever\else
+SET PATH=%PATH%;C:\Program Files (x86)\VMware\VMware Player
+::--------------------------------------------------
 :: Meir-Tools | VMware assist | set Global variables
 ::--------------------------------------------------
 set VMware_Player=C:\Program Files (x86)\VMware\VMware Player
