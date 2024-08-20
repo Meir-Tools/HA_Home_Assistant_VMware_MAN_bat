@@ -65,22 +65,22 @@ GOTO :Main
 ::--------------------------MAN Functions------------------------------------------------
 :OPT1 | 1 - Run VM (gui)
 	::"%vmrun%" start "%VMX_File%" nogui &REM gui
-	"%vmrun%" start "%VMX_File%" gui &REM gui
+	vmrun start "%VMX_File%" gui &REM gui
 	::start "" %WinSCP% sftp://%my_user%:%my_pass%@%my_ip%
 EXIT /B 0
 :OPT2 | 2 - List VM
 	::cd "%VMware_Player%" & vmrun list &REM Old version
-	"%vmrun%" list
+	vmrun list
 	pause
 EXIT /B 0
 :OPT3 | 3 - Stop VM (soft)
-	"%vmrun%" stop "%VMX_File%" soft
+	vmrun stop "%VMX_File%" soft
 EXIT /B 0
 :OPT4 | 4 - Stop VM (hard)
-	"%vmrun%" stop "%VMX_File%" hard
+	vmrun stop "%VMX_File%" hard
 EXIT /B 0
 :OPT5 | 5 - Get IP
-	"%vmrun%" getGuestIPAddress "%VMX_File%"
+	vmrun getGuestIPAddress "%VMX_File%"
 	pause
 EXIT /B 0
 :OPT- | - - - - - - costum functions here - - - - - - - - - -  
